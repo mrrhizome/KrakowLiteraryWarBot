@@ -40,7 +40,7 @@ while bestwritercount < len(writersdata):
 
         #summaries
         
-        print('{} podbija ławki {}. {} czytają do upadłego utwór „{}”.'.format(won, lost, persona, books[won]))
+        print('\n{} podbija ławki {}. {} czytają do upadłego utwór „{}”.'.format(won, lost, persona, books[won]))
 
         i=0
         for row in writersdata:
@@ -54,15 +54,19 @@ while bestwritercount < len(writersdata):
             writer = str(row[0])
             cnt[writer] += 1
 
-        print("\n{} dzierży teraz władzę nad {} ławkami".format(won, cnt[won]))
+        print("{} dzierży teraz władzę nad {} ławkami".format(won, cnt[won]))
 
         bestwritercount = int(cnt.most_common()[0][1])
         bestwriter = str(cnt.most_common()[0][0])
+        writersLeft = len(cnt.keys())
 
-        print("Na placu boju pozostało {} pisarzy i pisarek".format(len(cnt.keys())))
-        #print("\nNajwięcej ławek ma teraz {} ({}).".format(cnt.most_common()[0][0], bestwritercount))
+        if writersLeft > 2:
+            print("\nNajwięcej ławek mają teraz: \n1. {} – {}\n2. {} – {}\n3.{} – {}.".format(cnt.most_common()[0][0], cnt.most_common()[0][1], cnt.most_common()[1][0], cnt.most_common()[1][1], cnt.most_common()[2][0], cnt.most_common()[2][1]))
+        elif writersLeft > 2:
+            print("\nNajwięcej ławek mają teraz: \n1. {} – {}\n2. {} – {}\n3.{} – {}.".format(cnt.most_common()[0][0], cnt.most_common()[0][1], cnt.most_common()[1][0], cnt.most_common()[1][1]))
         
-    
+            print("Na placu boju pozostało {} pisarzy i pisarek".format(writersLeft))
+        
 fwriters.close()
 fpersona.close()
 
