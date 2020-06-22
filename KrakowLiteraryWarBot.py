@@ -129,7 +129,7 @@ while cnt.most_common()[0][1] < len(writersData):
     strongChance = random.randint(1,10)
     
     #a chance that a person with much less points will conquer a bigger player
-    luckyShot = random.randint(1,5)
+    luckyShot = random.randint(1,10)
 
     #special event?
     isSpecialTurn = 0
@@ -150,18 +150,21 @@ while cnt.most_common()[0][1] < len(writersData):
         if difference > 0.2:
             fairRatio = True
 
-        if won != lost and (fairRatio or luckyShot == 1):
+        if won != lost and (fairRatio or luckyShot > 2):
             weHaveWinner = True
     
     
     #print("\nTura {}, runda {}, dzień {}, tydzień {}".format(turn, dailyTurnCnt, weekDay, weekCnt))
         
     
-    # first turn - always a fight
+    # first turn = always a fight
     if turn == 1:
         conquer(won, lost, cnt) 
     
-    # special event?
+    elif dailyTurnCnt == 7 and len(cnt.keys()) > 10:
+        showStats()
+        
+    # special event? Then print and remove from the list
     elif isSpecialTurn == 1:
         eventIndex = random.randint(0,len(eventsData)-1)
         event = eventsData[eventIndex][0]
@@ -169,12 +172,12 @@ while cnt.most_common()[0][1] < len(writersData):
         print(event)
         del eventsData[eventIndex]
 
-    # if no special event - a fight
+    # no special event = a fight
     else:
         conquer(won, lost, cnt)
 
-    #show statistics (once a day)
-    if dailyTurnCnt == 7 or len(cnt.keys()) < 11:
+    #show statistics each time in last 10 turns
+    if len(cnt.keys()) <= 10:
         showStats()
  
     #time counter
