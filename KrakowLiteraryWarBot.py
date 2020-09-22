@@ -19,13 +19,13 @@ eventsData = list(csv.reader(fevents, delimiter=';'))
 turnWinner = []
 books = {}
 inflection = {}
-links={}
+links = {}
 
 for row in writersData:
     writer = str(row[0])
     book = str(row[1])
     books[writer] = book
-    inflection[writer]= str(row[2])
+    inflection[writer] = str(row[2])
     links[writer] = str(row[3])
 
 
@@ -35,8 +35,8 @@ for row in writersData:
     writer = str(row[0])
     cnt[writer] += 1
 
-turn=1
-fight=0
+turn = 1
+fight = 0
 dailyTurnCnt = 1
 weekDay = 1
 weekCnt = 1
